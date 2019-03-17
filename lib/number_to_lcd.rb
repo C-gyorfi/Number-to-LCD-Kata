@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 class Number_to_lcd
   LCD_NUMBERS =
     { '1' => "   \n | \n | \n",
@@ -11,45 +13,60 @@ class Number_to_lcd
       '9' => " _ \n|_|\n _|\n",
       '0' => " _ \n| |\n|_|\n" }.freeze
 
-  def self.display(integer, size=1)
+  def self.display(integer, size = 1)
     result = ''
-    numbers_as_string_array = integer.to_s.chars
+    numbers_as_char_array = integer.to_s.chars
 
     resised_numbers_array = []
-    numbers_as_string_array.each{|number| resised_numbers_array << resize(LCD_NUMBERS[number], size) }
-
-    height_of_digits = resised_numbers_array[0].count("\n") - 1
-    
-    (0..height_of_digits).each do |index|
-      resised_numbers_array.each { |number| result << number.split("\n")[index] }
-      result << "\n"
+    numbers_as_char_array.each do |number|
+      resised_numbers_array << resize(LCD_NUMBERS[number], size)
     end
 
+    height_of_digits = resised_numbers_array.first.count("\n") - 1
+
+    (0..height_of_digits).each do |index|
+      resised_numbers_array.each do |number|
+        result << number.split("\n")[index]
+      end
+      result << "\n"
+    end
     result
   end
 
+  private
+
   def self.resize(lcd_number, size)
-      return lcd_number if size == 1
-      resized_lcd_number = ''
+    return lcd_number if size == 1
 
-      lcd_copy = lcd_number.gsub '_', '_' + '_' * size
-      lcd_copy.gsub! ' |', ' ' * size + ' |'
-      lcd_to_lines = lcd_copy.split("\n")
+    lcd_extended_width = resize_width(lcd_number, size)
+    resize_height(lcd_extended_width, size)
+  end
 
-      lcd_to_lines.each do |line|
-        if line.include?('|')
-          line_with_pipes = line.gsub '_', ' '
-          line_with_underscores = line.gsub '|', ' '
-          size.times {resized_lcd_number << line_with_pipes + "\n"}
-          resized_lcd_number << line_with_underscores + "\n"
-        else
-          if line.include?('_')
-            resized_lcd_number << line + "\n"
-          else
-            resized_lcd_number << line + (' ' * size) + "\n"
-          end
-        end
+  def self.resize_width(lcd_number, size)
+    lcd_copy = lcd_number.gsub '_', '_' + '_' * size
+    lcd_copy.gsub! ' |', ' ' * size + ' |'
+    lcd_copy
+  end
+
+  def self.resize_height(lcd_number, size)
+    resized = ''
+    lines = lcd_number.split("\n")
+    endline = ' ' * size + "\n"
+
+    lines.each do |line|
+      if line.include?('|')
+        line_with_pipes = line.tr '_', ' '
+        line_with_underscores = line.tr '|', ' '
+        size.times { resized << line_with_pipes + endline }
+        resized << line_with_underscores + endline
+      else
+        resized << if line.include?('_')
+                     line + endline
+                   else
+                     line + (' ' * size) + endline
+                   end
       end
-    resized_lcd_number
+    end
+    resized
   end
 end
