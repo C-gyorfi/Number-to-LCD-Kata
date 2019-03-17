@@ -20,4 +20,3 @@ Note: Please do *NOT* read the second part before completing the first. Part of 
 
 ## References
 [LearnTech by MadeTech](https://learn.madetech.com/katas/number-to-lcd/)
-[codingdojo.org](https://codingdojo.org/kata/NumberToLCD/)
