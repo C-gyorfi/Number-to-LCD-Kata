@@ -67,4 +67,6 @@ class Number_to_lcd
     end
     resized
   end
+
+  #some changes here
 end
