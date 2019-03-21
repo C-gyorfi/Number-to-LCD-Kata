@@ -45,9 +45,9 @@ describe Number_to_lcd do
         " ____    \n|    |   \n|    |   \n|    |   \n         \n|    |   \n|    |   \n|    |   \n ____    \n")
     end
 
-    it 'can convert multiple digits to any size' do
-      expect(Number_to_lcd.display(12_345_678_910, size = 4)).to eq('')
-    end
+    # it 'can convert multiple digits to any size' do
+    #   expect(Number_to_lcd.display(12_345_678_910, size = 4)).to eq('')
+    # end
     # 0, 4, 7,
   end
 end
