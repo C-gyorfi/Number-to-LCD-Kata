@@ -33,8 +33,6 @@ class Number_to_lcd
     result
   end
 
-  private
-
   def self.resize(lcd_number, size)
     return lcd_number if size == 1
 
