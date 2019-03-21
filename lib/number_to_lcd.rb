@@ -38,8 +38,8 @@ class Number_to_lcd
   def self.resize(lcd_number, size)
     return lcd_number if size == 1
 
-    lcd_extended_width = resize_width(lcd_number, size)
-    resize_height(lcd_extended_width, size)
+    extended_width = resize_width(lcd_number, size)
+    resize_height(extended_width, size)
   end
 
   def self.resize_width(lcd_number, size)
