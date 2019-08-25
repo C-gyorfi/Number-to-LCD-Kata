@@ -1,6 +1,7 @@
 # Number to LCD
 
 Goal: write a program that displays LCD style numbers.
+![img](num_to_lcd.png)
 
 ### Part 1
 
